@@ -12,7 +12,7 @@
 
     function negativeToZero(x, i, arr) {
         if (x < 0) {
-            return arr[i] = 0;
+            return arr[i] = 0;            //It is not required to use return (just write arr[i] = 0;)
         }
     }
 
@@ -35,7 +35,7 @@
     console.log(randnomNumber);
 
     function ifLess(x) {
-        return (x < randnomNumber);
+        return (x < randnomNumber);   //It is not required to use braces
     }
 
     let newArr = arr.filter(ifLess);
@@ -55,7 +55,7 @@
 
     function price1000(x, i, arr) {
         if (x < 1000) {
-            return arr[i] = Math.floor(x * 1.2);
+            return arr[i] = Math.floor(x * 1.2);  //The same: don't use "return"
         }
         if (x > 1000) {
             return arr[i] = Math.floor(x * 0.7);
@@ -73,7 +73,7 @@
 
     let firstSymbolName = prompt("Enter the first character of the name", "M");
 
-    function someNameArray(x) {
+    function someNameArray(x) {           //The function must return true/false
 
         let elementOfArray = x.split("");
 
@@ -124,7 +124,7 @@
 
 // Задача 7. Розробити функцію, яка би для довільної кількості переданих символів визначала, кількість букв «а».
 {
-    function counterCharacterA() {
+    function counterCharacterA() {        //Ok, But you can use "reduce"
         let count = 0;
 
         for (let i = 0; i < arguments.length; i++) {
@@ -142,7 +142,7 @@
 
 // Задача 8. Розробити функцію, яка би для довільної кількості чисел знаходила добуток чисел.
 {
-    function productNumbers() {
+    function productNumbers() {              //The same
         let multiplier = 1;
 
         for (let i = 0; i < arguments.length; i++) {
@@ -159,7 +159,7 @@
 // Задача 9. Розробити функцію, яка би для довільної кількості чисел знаходила максимальне.
 {
     function maxNumber() {
-        let max = arguments[0];
+        let max = arguments[0];             //The same
 
         for (let i = 1; i < arguments.length; i++) {
 
@@ -181,7 +181,7 @@
 
     console.log(nameArray);
 
-    function sortLastCharacter(item1, item2) {
+    function sortLastCharacter(item1, item2) {       //In this function you have 2 values to be compared (don't use split)
 
         if (item1.split("")[item1.length - 1] > item2.split("")[item2.length - 1]) {
             return 1;
@@ -208,7 +208,7 @@
 
     function sale(x, i, arr) {
         if (x < 1000) {
-            return arr[i] = Math.floor(x * 0.95);
+            return arr[i] = Math.floor(x * 0.95); // Error!!!
         }
         if (x > 1000) {
             return arr[i] = Math.floor(x * 0.8);
@@ -231,7 +231,7 @@
     console.log(arr);
 
     function soldier(x) {
-        if (x > 18 && x < 25) {
+        if (x > 18 && x < 25) {   //Error
             return x;
         }
     }
@@ -252,7 +252,7 @@
     console.log(arr);
 
     function hemoglobin(x) {
-        return (x < 115);
+        return (x < 115);     //Don't use brackets
     }
 
     let hemoglobinLess115 = arr.filter(hemoglobin);
@@ -271,7 +271,7 @@
     console.log(arr);
 
     function product(x) {
-        return (x < 2000);
+        return (x < 2000);   //The same
     }
 
     let productLess2000 = arr.filter(product);
@@ -305,7 +305,7 @@
 
     console.log(licensePlateArray);
 
-    function rule(x) {
+    function rule(x) {              //You must return true/false
 
         if (x.split("")[0] == "А" && x.split("")[x.length - 1] == "Р") {
             return x;
