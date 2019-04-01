@@ -12,7 +12,7 @@
 
     function negativeToZero(x, i, arr) {
         if (x < 0) {
-            return arr[i] = 0;
+            arr[i] = 0;
         }
     }
 
@@ -35,7 +35,7 @@
     console.log(randnomNumber);
 
     function ifLess(x) {
-        return (x < randnomNumber);
+        return x < randnomNumber;
     }
 
     let newArr = arr.filter(ifLess);
@@ -55,10 +55,10 @@
 
     function price1000(x, i, arr) {
         if (x < 1000) {
-            return arr[i] = Math.floor(x * 1.2);
+            arr[i] = Math.floor(x * 1.2);
         }
         if (x > 1000) {
-            return arr[i] = Math.floor(x * 0.7);
+            arr[i] = Math.floor(x * 0.7);
         }
     }
 
@@ -78,7 +78,7 @@
         let elementOfArray = x.split("");
 
         if (elementOfArray[0] == firstSymbolName) {
-            return x;
+            return true;
         }
     }
 
@@ -207,7 +207,7 @@
     console.log(arr);
 
     function sale(x, i, arr) {
-        if (x < 1000) {
+        if (x <= 1000) {
             return arr[i] = Math.floor(x * 0.95);
         }
         if (x > 1000) {
@@ -231,7 +231,7 @@
     console.log(arr);
 
     function soldier(x) {
-        if (x > 18 && x < 25) {
+        if (x >= 18 && x < 25) {
             return x;
         }
     }
@@ -252,7 +252,7 @@
     console.log(arr);
 
     function hemoglobin(x) {
-        return (x < 115);
+        return x < 115;
     }
 
     let hemoglobinLess115 = arr.filter(hemoglobin);
@@ -271,7 +271,7 @@
     console.log(arr);
 
     function product(x) {
-        return (x < 2000);
+        return x < 2000;
     }
 
     let productLess2000 = arr.filter(product);
@@ -308,7 +308,7 @@
     function rule(x) {
 
         if (x.split("")[0] == "А" && x.split("")[x.length - 1] == "Р") {
-            return x;
+            return true;
         }
     }
 
