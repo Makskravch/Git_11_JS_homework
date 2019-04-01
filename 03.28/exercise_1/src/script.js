@@ -34,7 +34,7 @@
     let randnomNumber = Math.floor(Math.random() * 100);
     console.log(randnomNumber);
 
-    function ifLess(x, i, arr) {
+    function ifLess(x) {
         return (x < randnomNumber);
     }
 
@@ -73,7 +73,7 @@
 
     let firstSymbolName = prompt("Enter the first character of the name", "M");
 
-    function someNameArray(x, i, arr) {
+    function someNameArray(x) {
 
         let elementOfArray = x.split("");
 
@@ -97,7 +97,7 @@
 
     console.log(arr);
 
-    function weigher(x, i, arr) {
+    function weigher(x) {
         return x < 2000;
     }
 
@@ -115,7 +115,7 @@
 
     console.log(arr);
 
-    function weigher(x, i, arr) {
+    function weigher(x) {
         return x < 10;
     }
 
@@ -230,7 +230,7 @@
 
     console.log(arr);
 
-    function soldier(x, i, arr) {
+    function soldier(x) {
         if (x > 18 && x < 25) {
             return x;
         }
@@ -251,7 +251,7 @@
 
     console.log(arr);
 
-    function hemoglobin(x, i, arr) {
+    function hemoglobin(x) {
         return (x < 115);
     }
 
@@ -270,7 +270,7 @@
 
     console.log(arr);
 
-    function product(x, i, arr) {
+    function product(x) {
         return (x < 2000);
     }
 
@@ -289,7 +289,7 @@
 
     console.log(arr);
 
-    function productSum(sum, x, i, arr) {
+    function productSum(sum, x) {
         if (x > 1000 && x < 2000) {
             sum += x;
         }
@@ -301,5 +301,36 @@
 
 // 7.	Задача. Дано масив номерів автомобілів. Сформувати масив тих, які починаються на літеру «А» і закінчуються на літеру «Р».
 {
-    
+    let licensePlateArray = ["СЕ5676СН", "АК3884АР", "АН2603НХ", "АК2452НН", "ВН2569ЕО", "АН0844АА", "СЕ7694АО", "АМ5368ВО", "АМ2608ВР", "ВЕ3605ВН", "АА5126СР", "АА6172СН",];
+
+    console.log(licensePlateArray);
+
+    function rule(x) {
+
+        if (x.split("")[0] == "А" && x.split("")[x.length - 1] == "Р") {
+            return x;
+        }
+    }
+
+    let filterLicensePlateArray = licensePlateArray.filter(rule);
+    console.log(filterLicensePlateArray);
+}
+
+// 8.	Задача. Дано масив літер. Сформувати рядок, який складається тільки з голосних літер.
+{
+    let characterArray = ["k", "e", "c", "u", "A", "c", "k", "l", "k", "i", "m", "d", "a", "O", "f", "E", "y"];
+    console.log(characterArray);
+
+    function vowels(concat, x) {
+
+        if (x == "a" || x == "A" || x == "e" || x == "E" || x == "i" || x == "I" || x == "o" || x == "O" ||
+            x == "u" || x == "U" || x == "y" || x == "Y") {
+            concat += x;
+        }
+
+        return concat;
+    }
+
+    let result = characterArray.reduce(vowels, "");
+    console.log(result);
 }
