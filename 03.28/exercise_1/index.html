@@ -12,7 +12,7 @@
 <body>
     <script>
         let arr = [];
-    let quantity = Math.floor(Math.random() * 10 + 1);
+    let quantity = Math.floor(Math.random() * 100 + 1);
 
     for (let i = 0; i < quantity; i++) {
         arr[i] = Math.floor(Math.random() * 4000 + 1);
@@ -20,14 +20,12 @@
 
     console.log(arr);
 
-    function productSum(sum, x, i, arr) {
-        if (x > 1000 && x < 2000) {
-            sum += x;
-        }
-        return sum;
+    function product(x) {
+        return (x < 2000);
     }
 
-    console.log(arr.reduce(productSum, 0));
+    let productLess2000 = arr.filter(product);
+    console.log(productLess2000);
     </script>
 </body>
 
