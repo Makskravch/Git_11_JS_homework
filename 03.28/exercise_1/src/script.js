@@ -183,10 +183,10 @@
 
     function sortLastCharacter(item1, item2) {
 
-        if (item1.split("")[item1.length - 1] > item2.split("")[item2.length - 1]) {
+        if (item1[item1.length - 1] > item2[item2.length - 1]) {
             return 1;
         }
-        if (item1.split("")[item1.length - 1] < item2.split("")[item2.length - 1]) {
+        if (item1[item1.length - 1] < item2[item2.length - 1]) {
             return -1;
         }
         return 0;
