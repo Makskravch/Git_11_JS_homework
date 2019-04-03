@@ -10,13 +10,13 @@
 
     console.log(arr);
 
-    function negativeToZero(x, i, arr) {
-        if (x < 0) {
-            arr[i] = 0;
-        }
-    }
+    // function negativeToZero(x, i, arr) {
+    //     if (x < 0) {
+    //         arr[i] = 0;
+    //     }
+    // }
 
-    arr.forEach(negativeToZero);
+    arr.forEach((x, i, arr) => (x < 0) ? arr[i] = 0 : x);
     console.log(arr);
 }
 
@@ -34,11 +34,11 @@
     let randnomNumber = Math.floor(Math.random() * 100);
     console.log(randnomNumber);
 
-    function ifLess(x) {
-        return x < randnomNumber;
-    }
+    // function ifLess(x) {
+    //     return x < randnomNumber;
+    // }
 
-    let newArr = arr.filter(ifLess);
+    let newArr = arr.filter(x => x < randnomNumber);
     console.log(newArr);
 }
 
@@ -53,16 +53,17 @@
 
     console.log(arr);
 
-    function price1000(x, i, arr) {
-        if (x < 1000) {
-            arr[i] = Math.floor(x * 1.2);
-        }
-        if (x > 1000) {
-            arr[i] = Math.floor(x * 0.7);
-        }
-    }
+    // function price1000(x, i, arr) {
+    //     if (x < 1000) {
+    //         arr[i] = Math.floor(x * 1.2);
+    //     }
+    //     if (x > 1000) {
+    //         arr[i] = Math.floor(x * 0.7);
+    //     }
+    // }
 
-    console.log(arr.forEach(price1000));
+    arr.forEach((x, i, arr) => x <= 1000 ? arr[i] = Math.floor(x * 1.2) : arr[i] = Math.floor(x * 0.7));
+    console.log(arr);
 }
 
 // Задача 4. Дано масив імен. Сформувати новий масив, який складається з імен, які починаються на задану літеру.
@@ -73,16 +74,14 @@
 
     let firstSymbolName = prompt("Enter the first character of the name", "M");
 
-    function someNameArray(x) {
+    // function someNameArray(x) {
 
-        let elementOfArray = x.split("");
+    //     if (x[0] == firstSymbolName) {
+    //         return true;
+    //     }
+    // }
 
-        if (elementOfArray[0] == firstSymbolName) {
-            return true;
-        }
-    }
-
-    let newNameArray = nameArray.filter(someNameArray);
+    let newNameArray = nameArray.filter(x => x[0] === firstSymbolName);
     console.log(newNameArray);
 }
 
@@ -92,16 +91,16 @@
     let quantity = Math.floor(Math.random() * 10 + 1);
 
     for (let i = 0; i < quantity; i++) {
-        arr[i] = Math.floor(Math.random() * 4000 + 1);
+        arr[i] = Math.floor(Math.random() * 3000 + 1);
     }
 
     console.log(arr);
 
-    function weigher(x) {
-        return x < 2000;
-    }
+    // function weigher(x) {
+    //     return x < 2000;
+    // }
 
-    console.log(arr.every(weigher));
+    console.log(arr.every(x => x < 2000));
 
 }
 
@@ -115,63 +114,83 @@
 
     console.log(arr);
 
-    function weigher(x) {
-        return x < 10;
-    }
+    // function visitor(x) {
+    //     return x < 10;
+    // }
 
-    console.log(arr.some(weigher));
+    console.log(arr.some(x => x < 10));
 }
 
 // Задача 7. Розробити функцію, яка би для довільної кількості переданих символів визначала, кількість букв «а».
 {
-    function counterCharacterA() {
-        let count = 0;
+    let arrCharacters = ["a", "b", "c", "d", "a", "c", "k", "l", "k", "i", "m", "d", "a", "b", "f"];
 
-        for (let i = 0; i < arguments.length; i++) {
+    // function counterCharacterA() {
+    //     let count = 0;
 
-            if (arguments[i] == "a" || arguments[i] == "A") {
-                count++;
-            }
-        }
+    //     for (let i = 0; i < arguments.length; i++) {
 
-        return count;
-    }
+    //         if (arguments[i] == "a" || arguments[i] == "A") {
+    //             count++;
+    //         }
+    //     }
 
-    console.log(counterCharacterA("a", "b", "c", "d", "a", "c", "k", "l", "k", "i", "m", "d", "a", "b", "f"));
+    //     return count;
+    // }
+
+    console.log(arrCharacters.reduce((count, x) => (x === "a" || x === "A") ? ++count : count, 0));
 }
 
 // Задача 8. Розробити функцію, яка би для довільної кількості чисел знаходила добуток чисел.
 {
-    function productNumbers() {
-        let multiplier = 1;
+    let arr = [];
+    let quantity = Math.floor(Math.random() * 100 + 1);
 
-        for (let i = 0; i < arguments.length; i++) {
-
-            multiplier *= arguments[i];
-        }
-
-        return multiplier;
+    for (let i = 0; i < quantity; i++) {
+        arr[i] = Math.floor(Math.random() * 100 + 1);
     }
 
-    console.log(productNumbers(1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
+    console.log(arr);
+
+    // function productNumbers() {
+    //     let multiplier = 1;
+
+    //     for (let i = 0; i < arguments.length; i++) {
+
+    //         multiplier *= arguments[i];
+    //     }
+
+    //     return multiplier;
+    // }
+
+    console.log(arr.reduce((multiplier, x) => multiplier *= x));
 }
 
 // Задача 9. Розробити функцію, яка би для довільної кількості чисел знаходила максимальне.
 {
-    function maxNumber() {
-        let max = arguments[0];
+    let arr = [];
+    let quantity = Math.floor(Math.random() * 100 + 1);
 
-        for (let i = 1; i < arguments.length; i++) {
-
-            if (max < arguments[i]) {
-                max = arguments[i];
-            }
-        }
-
-        return max;
+    for (let i = 0; i < quantity; i++) {
+        arr[i] = Math.floor(Math.random() * 100 + 1);
     }
 
-    console.log(maxNumber(1, 8, -5, 3, 0, 10, 15, -55));
+    console.log(arr);
+
+    // function maxNumber() {
+    //     let max = arguments[0];
+
+    //     for (let i = 1; i < arguments.length; i++) {
+
+    //         if (max < arguments[i]) {
+    //             max = arguments[i];
+    //         }
+    //     }
+
+    //     return max;
+    // }
+
+    console.log(arr.reduce((max, x) => (max < x) ? max = x : max));
 }
 
 // ДЗ_2
@@ -181,18 +200,18 @@
 
     console.log(nameArray);
 
-    function sortLastCharacter(item1, item2) {
+    // function sortLastCharacter(item1, item2) {
 
-        if (item1[item1.length - 1] > item2[item2.length - 1]) {
-            return 1;
-        }
-        if (item1[item1.length - 1] < item2[item2.length - 1]) {
-            return -1;
-        }
-        return 0;
-    }
+    //     if (item1[item1.length - 1] > item2[item2.length - 1]) {
+    //         return 1;
+    //     }
+    //     if (item1[item1.length - 1] < item2[item2.length - 1]) {
+    //         return -1;
+    //     }
+    //     return 0;
+    // }
 
-    console.log(nameArray.sort(sortLastCharacter));
+    console.log(nameArray.sort((a, b) => a.charCodeAt(a.length - 1) - b.charCodeAt(b.length - 1)));
 }
 
 // 2.	Задача. Дано масив цін. Для усіх товарів, які дорожчі за 1000грн дати знижку 20% (помножити на 0.8), а для усіх інших товарів – надати 5 % знижки (помножити на 0.95).
@@ -206,16 +225,16 @@
 
     console.log(arr);
 
-    function sale(x, i, arr) {
-        if (x <= 1000) {
-            return arr[i] = Math.floor(x * 0.95);
-        }
-        if (x > 1000) {
-            return arr[i] = Math.floor(x * 0.8);
-        }
-    }
+    // function sale(x, i, arr) {
+    //     if (x <= 1000) {
+    //         return arr[i] = Math.floor(x * 0.95);
+    //     }
+    //     if (x > 1000) {
+    //         return arr[i] = Math.floor(x * 0.8);
+    //     }
+    // }
 
-    let saleArray = arr.map(sale);
+    let saleArray = arr.map(x => (x > 1000) ? Math.floor(x * 0.8) : Math.floor(x * 0.95));
     console.log(saleArray);
 }
 
@@ -230,13 +249,13 @@
 
     console.log(arr);
 
-    function soldier(x) {
-        if (x >= 18 && x < 25) {
-            return x;
-        }
-    }
+    // function soldier(x) {
+    //     if (x >= 18 && x < 25) {
+    //         return x;
+    //     }
+    // }
 
-    let draftee = arr.filter(soldier);
+    let draftee = arr.filter(x => (x >= 18 && x <= 25) ? x : false);
     console.log(draftee);
 }
 
@@ -251,11 +270,11 @@
 
     console.log(arr);
 
-    function hemoglobin(x) {
-        return x < 115;
-    }
+    // function hemoglobin(x) {
+    //     return x < 115;
+    // }
 
-    let hemoglobinLess115 = arr.filter(hemoglobin);
+    let hemoglobinLess115 = arr.filter(x => x < 115);
     console.log(hemoglobinLess115);
 }
 
@@ -270,11 +289,11 @@
 
     console.log(arr);
 
-    function product(x) {
-        return x < 2000;
-    }
+    // function product(x) {
+    //     return x < 2000;
+    // }
 
-    let productLess2000 = arr.filter(product);
+    let productLess2000 = arr.filter(x => x < 2000);
     console.log(productLess2000);
 }
 
@@ -289,14 +308,14 @@
 
     console.log(arr);
 
-    function productSum(sum, x) {
-        if (x > 1000 && x < 2000) {
-            sum += x;
-        }
-        return sum;
-    }
+    // function productSum(sum, x) {
+    //     if (x >= 1000 && x <= 2000) {
+    //         sum += x;
+    //     }
+    //     return sum;
+    // }
 
-    console.log(arr.reduce(productSum, 0));
+    console.log(arr.reduce((sum, x) => (x >= 1000 && x <= 2000) ? sum += x : sum, 0));
 }
 
 // 7.	Задача. Дано масив номерів автомобілів. Сформувати масив тих, які починаються на літеру «А» і закінчуються на літеру «Р».
@@ -305,14 +324,14 @@
 
     console.log(licensePlateArray);
 
-    function rule(x) {
+    // function rule(x) {
 
-        if (x.split("")[0] == "А" && x.split("")[x.length - 1] == "Р") {
-            return true;
-        }
-    }
+    //     if (x.split("")[0] == "А" && x.split("")[x.length - 1] == "Р") {
+    //         return x;
+    //     }
+    // }
 
-    let filterLicensePlateArray = licensePlateArray.filter(rule);
+    let filterLicensePlateArray = licensePlateArray.filter(x => (x[0] == "А" && x[x.length - 1] == "Р") ? x : false);
     console.log(filterLicensePlateArray);
 }
 
@@ -321,16 +340,18 @@
     let characterArray = ["k", "e", "c", "u", "A", "c", "k", "l", "k", "i", "m", "d", "a", "O", "f", "E", "y"];
     console.log(characterArray);
 
-    function vowels(concat, x) {
+    // function vowels(concat, x) {
 
-        if (x == "a" || x == "A" || x == "e" || x == "E" || x == "i" || x == "I" || x == "o" || x == "O" ||
-            x == "u" || x == "U" || x == "y" || x == "Y") {
-            concat += x;
-        }
+    //     if (x == "a" || x == "A" || x == "e" || x == "E" || x == "i" || x == "I" || x == "o" || x == "O" ||
+    //         x == "u" || x == "U" || x == "y" || x == "Y") {
+    //         concat += x;
+    //     }
 
-        return concat;
-    }
+    //     return concat;
+    // }
 
-    let result = characterArray.reduce(vowels, "");
+    let result = characterArray.reduce((str, x) => (x === "a" || x === "A" || x === "e" || x === "E" || x === "i" || 
+                                                    x === "I" || x === "o" || x === "O" || x === "u" || x === "U" || 
+                                                    x === "y" || x === "Y") ? str += x : str, "");
     console.log(result);
 }
