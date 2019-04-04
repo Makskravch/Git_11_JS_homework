@@ -16,7 +16,7 @@
     //     }
     // }
 
-    arr.forEach((x, i, arr) => (x < 0) ? arr[i] = 0 : x);
+    arr.forEach((x, i, arr) => {if(x < 0) arr[i] = 0});
     console.log(arr);
 }
 
