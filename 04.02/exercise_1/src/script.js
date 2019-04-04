@@ -61,5 +61,36 @@
 
 // Задача 7. Дано рядок тексту. Знайти усі знаки пунктуації, які були використано.
 {
+    let str = "Donec 123sagittis, 'cursus' - 1elit. Et varius 12 leo tempor vel?!";
+    let symbol = /\W/g;
+
+    let result = str.match(symbol);
+
+    console.log(result);
+}
+
+// Задача 8. Дано рядок тексту. Вивести усі складові, які розділені розділовими знаками.
+{
+    let str = "Donec 123sagittis, 'cursus' - 1elit. Et varius 12 leo tempor vel?!";
+    let symbol = /\W/g;
+
+    let result = str.match(symbol);
+
+    console.log(result);
+
+    let filterResult = result.filter(x => x !== " ");
+    console.log(filterResult);
+
+    let lastArr = filterResult.map(x => str.split(x));
+    console.log(lastArr);
+}
+
+// Задача 9. Дано рядок тексту. Перевірити, чи містить він дату у форматі dd.mm.yyyy (dd- день, mm- місяць, yyyy- рік).
+{
+
+}
+
+// Задача 10. Дано рядок тексту. Підрахувати кількість двоцифрових чисел у рядку.
+{
     
 }
