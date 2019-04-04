@@ -16,7 +16,7 @@
     //     }
     // }
 
-    arr.forEach((x, i, arr) => {if(x < 0) arr[i] = 0});
+    arr.forEach((x, i, arr) => { if (x < 0) arr[i] = 0 });
     console.log(arr);
 }
 
@@ -62,7 +62,12 @@
     //     }
     // }
 
-    arr.forEach((x, i, arr) => x <= 1000 ? arr[i] = Math.floor(x * 1.2) : arr[i] = Math.floor(x * 0.7));
+    arr.forEach((x, i, arr) => {
+        if (x <= 1000)
+            arr[i] = Math.floor(x * 1.2)
+        else
+            arr[i] = Math.floor(x * 0.7)
+    });
     console.log(arr);
 }
 
@@ -138,7 +143,7 @@
     //     return count;
     // }
 
-    console.log(arrCharacters.reduce((count, x) => (x === "a" || x === "A") ? ++count : count, 0));
+    console.log(arrCharacters.reduce((count, x) => (x.toLowerCase() === "a") ? ++count : count, 0));
 }
 
 // Задача 8. Розробити функцію, яка би для довільної кількості чисел знаходила добуток чисел.
@@ -190,7 +195,7 @@
     //     return max;
     // }
 
-    console.log(arr.reduce((max, x) => (max < x) ? max = x : max));
+    console.log(arr.reduce((max, x) => (max < x) ? x : max));
 }
 
 // ДЗ_2
@@ -234,7 +239,12 @@
     //     }
     // }
 
-    let saleArray = arr.map(x => (x > 1000) ? Math.floor(x * 0.8) : Math.floor(x * 0.95));
+    let saleArray = arr.map(x => {
+        if (x > 1000)
+            Math.floor(x * 0.8)
+        else
+            Math.floor(x * 0.95)
+    });
     console.log(saleArray);
 }
 
@@ -315,7 +325,7 @@
     //     return sum;
     // }
 
-    console.log(arr.reduce((sum, x) => (x >= 1000 && x <= 2000) ? sum += x : sum, 0));
+    console.log(arr.reduce((sum, x) => (x >= 1000 && x <= 2000) ? sum + x : sum, 0));
 }
 
 // 7.	Задача. Дано масив номерів автомобілів. Сформувати масив тих, які починаються на літеру «А» і закінчуються на літеру «Р».
@@ -350,8 +360,9 @@
     //     return concat;
     // }
 
-    let result = characterArray.reduce((str, x) => (x === "a" || x === "A" || x === "e" || x === "E" || x === "i" || 
-                                                    x === "I" || x === "o" || x === "O" || x === "u" || x === "U" || 
-                                                    x === "y" || x === "Y") ? str += x : str, "");
+    let result = characterArray.reduce((str, x) => (x.toLowerCase() === "a" || x.toLowerCase() === "e" || 
+                x.toLowerCase() === "i" || x.toLowerCase() === "o" || x.toLowerCase() === "u" || 
+                x.toLowerCase() === "y") ? str += x : str, "");
+    
     console.log(result);
 }
