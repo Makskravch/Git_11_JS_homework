@@ -72,7 +72,7 @@
 // Задача 8. Дано рядок тексту. Вивести усі складові, які розділені розділовими знаками.
 {
     let str = "Donec 123sagittis, 'cursus' - 1elit. Et varius 12 leo tempor vel?!";
-    let reg = /\W/g;
+    let reg = /\W/g;    Спробуйте записати так, щоб не треба було додатково фільтрувати
 
     let withoutLetters = str.match(reg);
 
@@ -88,7 +88,7 @@
 // Задача 9. Дано рядок тексту. Перевірити, чи містить він дату у форматі dd.mm.yyyy (dd- день, mm- місяць, yyyy- рік).
 {
     let str = "Donec 123sagittis, 10.08.2019 'cursus' - 1elit. Et 8.09.1988 varius 12 leo tempor vel?!";
-    let reg = /\b\d\d?\.\d{2}\.\d{4}\b/g;
+    let reg = /\b\d\d?\.\d{2}\.\d{4}\b/g;  
     
     let result = str.match(reg);
     console.log(result);
