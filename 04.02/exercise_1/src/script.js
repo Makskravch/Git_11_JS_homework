@@ -108,3 +108,12 @@
     let result = str.match(reg);
     console.log(result);
 }
+
+// Задача 11. Поправте якщо що. розбити по 4 і між ними "-" + перевірка на цифри
+{
+    let cardNumber = prompt("Enter the 16 digit card number:", "");
+    let reg = /\d{4}/;
+    let arr = cardNumber.match(reg);
+    let result = arr.join("-");
+    console.log(result);
+}
