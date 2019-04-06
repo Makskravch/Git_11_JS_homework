@@ -71,17 +71,23 @@
 
 // Задача 8. Дано рядок тексту. Вивести усі складові, які розділені розділовими знаками.
 {
-    let str = "Donec 123sagittis, 'cursus' - 1elit. Et varius 12 leo tempor vel?!";
-    let reg = /\W/g;
+    let str = "Donec 123sagittis, 'cursus' - 1elit. Et varius 12/3 leo tempor vel?!?";
+    // let reg = /\W/g;
 
+    // let withoutLetters = str.match(reg);
+    // console.log(withoutLetters);
+
+    // let filterWithoutLetters = withoutLetters.filter(x => x !== " ");
+    // console.log(filterWithoutLetters);
+
+    // let result = filterWithoutLetters.map(x => str.split(x));
+    // console.log(result);
+
+    let reg = /(?=\W)\S|\W$/g;
     let withoutLetters = str.match(reg);
-
     console.log(withoutLetters);
 
-    let filterWithoutLetters = withoutLetters.filter(x => x !== " ");
-    console.log(filterWithoutLetters);
-
-    let result = filterWithoutLetters.map(x => str.split(x));
+    let result = withoutLetters.map(x => str.split(x));
     console.log(result);
 }
 
@@ -89,7 +95,7 @@
 {
     let str = "Donec 123sagittis, 10.08.2019 'cursus' - 1elit. Et 8.09.1988 varius 12 leo tempor vel?!";
     let reg = /\b\d\d?\.\d{2}\.\d{4}\b/g;
-    
+
     let result = str.match(reg);
     console.log(result);
 }
@@ -98,7 +104,7 @@
 {
     let str = "Donec 12 3sagittis, 10.08.2019 'cursus' - 1elit. Et 8.09.1988 varius 12 leo tempor456 65 vel?!";
     let reg = /\b\d{2}\b/g;
-    
+
     let result = str.match(reg);
     console.log(result);
 }
