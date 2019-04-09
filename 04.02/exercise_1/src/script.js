@@ -83,7 +83,7 @@
     // let result = filterWithoutLetters.map(x => str.split(x));
     // console.log(result);
 
-    let reg = /(?=\W)\S|\W$/g;
+    let reg = /(?=\W)\S|\W$/g;           Простіше було використати  -->  [ розділові знаки ] і вказати прямо у split 
     let withoutLetters = str.match(reg);
     console.log(withoutLetters);
 
@@ -96,7 +96,7 @@
     let str = "Donec 123sagittis, 10.08.2019 'cursus' - 1elit. Et 8.09.1988 varius 12 leo tempor vel?!";
     let reg = /\b\d\d?\.\d{2}\.\d{4}\b/g;
 
-    let result = str.match(reg);
+    let result = str.match(reg);  Для перевірки використовують метод test
     console.log(result);
 }
 
