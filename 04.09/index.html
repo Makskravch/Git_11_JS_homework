@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="src/script.js"></script>
+</head>
+
+<body>
+
+    <h4>Задача 1. Користувач задає рік народження. Визначити кількість років користувача</h4>
+
+    <label for="birthYear">Enter your birth year : </label>
+    <input type="number" id="birthYear" value="" placeholder="1990" /> <br>
+
+    <input type="button" id="btn" name="btn" value="Age" /><br>
+
+    <label for="age">Age : </label>
+    <input type="number" id="age" value="" /><br>
+
+    <!-- <script>
+        function getYear() {
+            let birthYear = parseInt(document.getElementById("birthYear").value);
+            document.getElementById("age").value = 2019 - birthYear;
+        }
+
+        window.onload = function () {
+            document.getElementById("btn").onclick = getYear;
+        }
+    </script> -->
+
+
+    <h4>Задача 2. Конвертер валют.</h4>
+
+    <label for="amountMoneyUAH">Enter amount of money in UAH : </label>
+    <input type="number" id="amountMoneyUAH" value="" placeholder="123.45" /> <br>
+
+    <input type="button" id="btn_1" name="btn_1" value="Convert" /><br>
+
+    <label for="amountMoneyUSD">Amount of USD : </label>
+    <input type="number" id="amountMoneyUSD" value="" /> <br>
+
+    <label for="amountMoneyEURO">Amount of EURO : </label>
+    <input type="number" id="amountMoneyEURO" value="" /> <br>
+
+    <!-- <script>
+        function convert() {
+            let uah = parseFloat(document.getElementById("amountMoneyUAH").value);
+            document.getElementById("amountMoneyUSD").value = Math.round((uah / 27.05) * 100) / 100;
+            document.getElementById("amountMoneyEURO").value = Math.round((uah / 30.30) * 100) / 100;
+        }
+
+        window.onload = function () {
+            document.getElementById("btn_1").onclick = convert;
+        }
+    </script> -->
+
+
+    <h4>Задача 3. Калькулятор з вибором операції (додавання, віднімання, множення, ділення).</h4>
+
+    <label for="firstNum">Enter the first number : </label>
+    <input type="number" id="firstNum" value="" placeholder="123.45" /> <br>
+
+    <input type="radio" name="operation" id="plus" checked>
+    <label for="plus">+</label> <br>
+    <input type="radio" name="operation" id="minus">
+    <label for="minus">-</label> <br>
+    <input type="radio" name="operation" id="multiply">
+    <label for="multiply">*</label> <br>
+    <input type="radio" name="operation" id="divide">
+    <label for="divide">/</label> <br>
+
+    <label for="secondNum">Enter the second number : </label>
+    <input type="number" id="secondNum" value="" placeholder="123.45" /> <br>
+
+    <input type="button" id="btn_2" name="btn_2" value="Result" /><br>
+
+    <label for="result">Result : </label>
+    <input type="number" id="result" value="" /> <br>
+
+    <!-- <script>
+        function calc() {
+            let num_1 = parseFloat(document.getElementById("firstNum").value);
+            let num_2 = parseFloat(document.getElementById("secondNum").value);
+
+            if (document.getElementById("plus").checked) {
+                document.getElementById("result").value = Math.round((num_1 + num_2) * 100) / 100;
+            } else if (document.getElementById("minus").checked) {
+                document.getElementById("result").value = Math.round((num_1 - num_2) * 100) / 100;
+            } else if (document.getElementById("multiply").checked) {
+                document.getElementById("result").value = Math.round((num_1 * num_2) * 100) / 100;
+            } else {
+                document.getElementById("result").value = Math.round((num_1 / num_2) * 100) / 100;
+            }
+        }
+
+        window.onload = function () {
+            document.getElementById("btn_2").onclick = calc;
+        }
+    </script> -->
+
+
+    <h4>Задача4. Дано списки продуктів. Знайти сумарну вартість</h4>
+
+    <ul>
+        <li>
+            <input class="check_product" type="checkbox" name="bread" id="bread" value="12.5">
+            <label for="bread">Bread (12.5 UAH)</label>
+        </li>
+        <li>
+            <input class="check_product" type="checkbox" name="eggs" id="eggs" value="18.65">
+            <label for="eggs">Eggs (18.65 UAH)</label>
+        </li>
+        <li>
+            <input class="check_product" type="checkbox" name="milk" id="milk" value="23.2">
+            <label for="milk">Milk (23.2 UAH)</label>
+        </li>
+        <li>
+            <input class="check_product" type="checkbox" name="meat" id="meat" value="120.55">
+            <label for="meat">Meat (120.55 UAH)</label>
+        </li>
+        <li>
+            <input class="check_product" type="checkbox" name="potato" id="potato" value="5.35">
+            <label for="potato">Potato (5.35 UAH)</label>
+        </li>
+        <li>
+            <input class="check_product" type="checkbox" name="tomato" id="tomato" value="3.99">
+            <label for="tomato">Tomato (3.99 UAH)</label>
+        </li>
+    </ul>
+    <button id="btn_3">Total price</button> <br>
+    <label for="price">Total price : </label>
+    <input type="number" name="price" id="price">
+
+    <!-- <script>
+        function getSum() {
+
+            let array = document.querySelectorAll('[class="check_product"]');
+            let sum = 0;
+
+            for (let i = 0; i < array.length; i++) {
+                if (array[i].checked) {
+                    sum += parseFloat(array[i].value);
+                }
+            }
+            document.getElementById("price").value = Math.round(sum * 100) / 100;
+        }
+
+        window.onload = function () {
+            document.getElementById("btn_3").onclick = getSum;
+        }
+    </script> -->
+</body>
+
+</html>
