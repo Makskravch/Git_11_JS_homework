@@ -14,7 +14,7 @@
 {
     function convert() {
         let uah = parseFloat(document.getElementById("amountMoneyUAH").value);
-        document.getElementById("amountMoneyUSD").value = Math.round((uah / 27.05)*100)/100;
+        document.getElementById("amountMoneyUSD").value = Math.round((uah / 27.05)*100)/100;  Для цих цілей є спеціальний метод toFixed
         document.getElementById("amountMoneyEURO").value = Math.round((uah / 30.30)*100)/100;
     }
 
@@ -57,7 +57,7 @@
                 sum += parseFloat(array[i].value);
             }
         }
-        document.getElementById("price").value = Math.round(sum * 100) / 100;
+        document.getElementById("price").value = Math.round(sum * 100) / 100;  toFixed
     }
 
     window.onload = function () {
