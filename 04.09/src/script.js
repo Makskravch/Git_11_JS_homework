@@ -117,13 +117,14 @@
         btnAvr.type = 'button';
         btnAvr.value = 'Get average';
         btnAvr.id = 'btn_6';
+        // btnAvr.setAttribute('onclick', 'getAvr()');
 
         document.getElementById('div').appendChild(btnAvr);
     }
     
     function getAvr() {
 
-        let inpArr = document.querySelectorAll('.input');
+        let inpArr = document.querySelectorAll('table:last-child .input');
         let sum = 0;
         
         for (let i = 0; i < inpArr.length; i++) {
@@ -164,7 +165,7 @@
         
         for (let i = 0; i < checkboxArr.length; i++) {
             if (checkboxArr[i].checked) {
-                taskList.removeChild(checkboxArr[i].closest('li'));
+                taskList.removeChild(checkboxArr[i].parentElement);
             }
         }
     }
@@ -177,40 +178,39 @@
 
 // Задача 8. Сформувати список працівників (ПІБ, посада, заробітна плата). По одному додається інформація про працівників у вигляді таблиці (як у попередньому завданні). Потім знайти сумарну заробітну плату працівників, у яких заробітна плата більша за 3000.
 {
-    // function writeData() {
-    //     let inpArr = document.querySelectorAll('#wrap input');
-    //     let table = document.getElementById('table');
+    function writeData() {
+        let inpArr = document.querySelectorAll('#wrap input');
+        let table = document.getElementById('table');
 
-    //     let tr = document.createElement('tr');
-    //     table.appendChild(tr);
+        let tr = document.createElement('tr');
+        table.appendChild(tr);
         
-    //     for (let i = 0; i < inpArr.length; i++) {
-    //         let td = document.createElement('td');
-    //         tr.appendChild(td);
-    //     }
+        for (let i = 0; i < inpArr.length; i++) {
+            tr.appendChild(document.createElement('td'));
+        }
 
-    //     let tdArr = document.querySelectorAll('#table tr:last-child td');
+        let tdArr = document.querySelectorAll('#table tr:last-child td');
+        
+        for (let i = 0; i < tdArr.length; i++) {
+            tdArr[i].innerText = inpArr[i].value;
+        }
+    }
 
-    //     for (let i = 0; i < tdArr.length; i++) {
-    //         tdArr[i].innerText = inpArr[i].value;
-    //     }
-    // }
+    function sumSalary() {
+        let salaryArr = document.querySelectorAll('#table tr td:last-child');
+        let sumSalary = 0;
 
-    // function sumSalary() {
-    //     let salaryArr = document.querySelectorAll('#table tr td:last-child');
-    //     let sumSalary = 0;
+        for (let i = 0; i < salaryArr.length; i++) {
+            if (+salaryArr[i].innerText > 3000) {
+                sumSalary += +salaryArr[i].innerText;
+            }
+        }
 
-    //     for (let i = 0; i < salaryArr.length; i++) {
-    //         if (+salaryArr[i].innerText > 3000) {
-    //             sumSalary += +salaryArr[i].innerText;
-    //         }
-    //     }
+        document.getElementById('sumSalary').innerText = `Sum salaries more than 3k: ${sumSalary}`;
+    }
 
-    //     document.getElementById('sumSalary').innerText = `Sum salaries more than 3k: ${sumSalary}`;
-    // }
-
-    // window.onload = function () {
-    //     document.getElementById('btn_9').onclick = writeData;
-    //     document.getElementById('btn_10').onclick = sumSalary;
-    // }
+    window.onload = function () {
+        document.getElementById('btn_9').onclick = writeData;
+        document.getElementById('btn_10').onclick = sumSalary;
+    }
 }
