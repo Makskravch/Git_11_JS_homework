@@ -109,22 +109,22 @@
         tbl.appendChild(tr);
         document.getElementById('div').appendChild(tbl);
             
-        // createButton();
+        createButton();
     }
     
-    function createButton() {                               // function to create a button
+    function createButton() {
         let btnAvr = document.createElement('input');
         btnAvr.type = 'button';
         btnAvr.value = 'Get average';
-        btnAvr.id = 'btn_6';
-        // btnAvr.setAttribute('onclick', 'getAvr()');
+        btnAvr.className = 'btn_6';
+        btnAvr.onclick = getAvr;
 
         document.getElementById('div').appendChild(btnAvr);
     }
     
     function getAvr() {
 
-        let inpArr = document.querySelectorAll('table:last-child .input');
+        let inpArr = document.querySelectorAll('table:last-of-type .input');
         let sum = 0;
         
         for (let i = 0; i < inpArr.length; i++) {
@@ -138,79 +138,79 @@
 
     window.onload = function () {
         document.getElementById('btn_5').onclick = createTable;
-        document.getElementById('btn_6').onclick = getAvr;
+        // document.querySelector('#div input:last-child').onclick = getAvr;
     }
 }
 
 // Задача 7. Сформувати список завдань ( з можливістю подальшого вилучення).
 {
-    function createTask() {
-        let task = document.getElementById('taskInp').value;
-        let taskList = document.getElementById('taskList');
+    // function createTask() {
+    //     let task = document.getElementById('taskInp').value;
+    //     let taskList = document.getElementById('taskList');
 
-        let li = document.createElement('li');
-        let inp = document.createElement('input');
-        inp.type = 'checkbox';
-        inp.className = 'checkbox';
-        let taskText = document.createTextNode(task);
+    //     let li = document.createElement('li');
+    //     let inp = document.createElement('input');
+    //     inp.type = 'checkbox';
+    //     inp.className = 'checkbox';
+    //     let taskText = document.createTextNode(task);
 
-        taskList.appendChild(li);
-        li.appendChild(inp);
-        li.appendChild(taskText);
-    }
+    //     taskList.appendChild(li);
+    //     li.appendChild(inp);
+    //     li.appendChild(taskText);
+    // }
 
-    function deleteTask() {
-        let checkboxArr = document.querySelectorAll('.checkbox');
-        let taskList = document.getElementById('taskList');
+    // function deleteTask() {
+    //     let checkboxArr = document.querySelectorAll('.checkbox');
+    //     let taskList = document.getElementById('taskList');
         
-        for (let i = 0; i < checkboxArr.length; i++) {
-            if (checkboxArr[i].checked) {
-                taskList.removeChild(checkboxArr[i].parentElement);
-            }
-        }
-    }
+    //     for (let i = 0; i < checkboxArr.length; i++) {
+    //         if (checkboxArr[i].checked) {
+    //             taskList.removeChild(checkboxArr[i].parentElement);
+    //         }
+    //     }
+    // }
     
-    window.onload = function () {
-        document.querySelector('#btn_7').onclick = createTask;
-        document.getElementById('btn_8').onclick = deleteTask;
-    }
+    // window.onload = function () {
+    //     document.querySelector('#btn_7').onclick = createTask;
+    //     document.getElementById('btn_8').onclick = deleteTask;
+    // }
 }
 
 // Задача 8. Сформувати список працівників (ПІБ, посада, заробітна плата). По одному додається інформація про працівників у вигляді таблиці (як у попередньому завданні). Потім знайти сумарну заробітну плату працівників, у яких заробітна плата більша за 3000.
 {
-    function writeData() {
-        let inpArr = document.querySelectorAll('#wrap input');
-        let table = document.getElementById('table');
+    // function writeData() {
+    //     let inpArr = document.querySelectorAll('#wrap input');
+    //     let table = document.getElementById('table');
 
-        let tr = document.createElement('tr');
-        table.appendChild(tr);
+    //     let tr = document.createElement('tr');
+    //     table.appendChild(tr);
         
-        for (let i = 0; i < inpArr.length; i++) {
-            tr.appendChild(document.createElement('td'));
-        }
+    //     for (let i = 0; i < inpArr.length; i++) {
+    //         tr.appendChild(document.createElement('td'));
+    //     }
 
-        let tdArr = table.querySelectorAll('tr:last-child td');
+    //     let tdArr = table.querySelectorAll('tr:last-child td');
         
-        for (let i = 0; i < tdArr.length; i++) {
-            tdArr[i].innerText = inpArr[i].value;
-        }
-    }
+    //     for (let i = 0; i < tdArr.length; i++) {
+    //         tdArr[i].innerText = inpArr[i].value;
+    //     }
+    // }
 
-    function sumSalary() {
-        let salaryArr = table.querySelectorAll('td:last-child');
-        let sumSalary = 0;
+    // function sumSalary() {
+    //     let salaryArr = table.querySelectorAll('td:last-child');
+    //     let sumSalary = 0;
 
-        for (let i = 0; i < salaryArr.length; i++) {
-            if (+salaryArr[i].innerText > 3000) {
-                sumSalary += +salaryArr[i].innerText;
-            }
-        }
+    //     for (let i = 0; i < salaryArr.length; i++) {
+    //         if (+salaryArr[i].innerText > 3000) {
+    //             sumSalary += +salaryArr[i].innerText;
+    //         }
+    //     }
 
-        document.getElementById('sumSalary').innerText = `Sum salaries more than 3k: ${sumSalary}`;
-    }
+    //     document.getElementById('sumSalary').innerText = `Sum salaries more than 3k: ${sumSalary}`;
+    // }
 
-    window.onload = function () {
-        document.getElementById('btn_9').onclick = writeData;
-        document.getElementById('btn_10').onclick = sumSalary;
-    }
+    // window.onload = function () {
+    //     document.getElementById('btn_9').onclick = writeData;
+    //     document.getElementById('btn_10').onclick = sumSalary;
+    // }
 }
