@@ -189,7 +189,7 @@
             tr.appendChild(document.createElement('td'));
         }
 
-        let tdArr = document.querySelectorAll('#table tr:last-child td');
+        let tdArr = table.querySelectorAll('tr:last-child td');
         
         for (let i = 0; i < tdArr.length; i++) {
             tdArr[i].innerText = inpArr[i].value;
@@ -197,7 +197,7 @@
     }
 
     function sumSalary() {
-        let salaryArr = document.querySelectorAll('#table tr td:last-child');
+        let salaryArr = table.querySelectorAll('td:last-child');
         let sumSalary = 0;
 
         for (let i = 0; i < salaryArr.length; i++) {
