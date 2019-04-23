@@ -412,8 +412,7 @@
 
     //     Min monthly payment amount: <input type="number" id="minMonthlyPaymentAmount"><br>
     //     Max monthly payment amount: <input type="number" id="maxMonthlyPaymentAmount"><br>
-    //     Minimum overpayment amount: <input type="number" id="minOverpaymentAmount"><br>
-    //     Maximum overpayment amount: <input type="number" id="maxOverpaymentAmount"><br>
+    //     Overpayment amount: <input type="number" id="minOverpaymentAmount"><br>
     //     <button id="btn">Calculate</button>
     // </div>
 
@@ -430,16 +429,15 @@
         }
 
         amountPaidOutMonthly() {
-            let minMonthlyPayment = (this.creditSum * ((this.percentage / 100) + 1)) / this.minMonth;
-            let maxMonthlyPayment = (this.creditSum * ((this.percentage / 100) + 1)) / this.maxMonth;
+            let minMonthlyPayment = (this.creditSum * ((this.percentage / 100) + 1)) / this.maxMonth;
+            let maxMonthlyPayment = (this.creditSum * ((this.percentage / 100) + 1)) / this.minMonth;
             let arr = [minMonthlyPayment, maxMonthlyPayment];
             return arr;
         }
-        
+
         totalAmountOfOverpayment() {
-            let minAmountOfOverpayment = (this.creditSum * ((this.percentage / 100) + 1)) - this.creditSum;
-            let maxAmountOfOverpayment = (this.creditSum * ((this.percentage / 100) + 1)) - this.creditSum;
-            return [minAmountOfOverpayment, maxAmountOfOverpayment];
+            let AmountOfOverpayment = (this.creditSum * ((this.percentage / 100) + 1)) - this.creditSum;
+            return AmountOfOverpayment;
         }
 
         render() {
@@ -450,26 +448,26 @@
         }
     }
 
-    let creditSum = parseFloat(document.getElementById('creditSumm').value);
-    let percentage = parseFloat(document.getElementById('percentageRate').value);
-    let minMonth = parseFloat(document.getElementById('minimumLoanPeriod').value);
-    let maxMonth = parseFloat(document.getElementById('maximumLoanPeriod').value);
-
-    let calcObj = new Calculator(creditSum, percentage, minMonth, maxMonth);
-
+    
     function calcAllPaid() {
+        let creditSum = parseFloat(document.getElementById('creditSumm').value);
+        let percentage = parseFloat(document.getElementById('percentageRate').value);
+        let minMonth = parseFloat(document.getElementById('minimumLoanPeriod').value);
+        let maxMonth = parseFloat(document.getElementById('maximumLoanPeriod').value);
+
+        let calcObj = new Calculator(creditSum, percentage, minMonth, maxMonth);
+
         let mpaArr = calcObj.amountPaidOutMonthly();
         document.getElementById('minMonthlyPaymentAmount').value = mpaArr[0];
         document.getElementById('maxMonthlyPaymentAmount').value = mpaArr[1];
 
-        let apomArr = calcObj.amountPaidOutMonthly();
-        document.getElementById('minMonthlyPaymentAmount').value = apomArr[0];
-        document.getElementById('maxMonthlyPaymentAmount').value = apomArr[1];
+        let apomArr = calcObj.totalAmountOfOverpayment();
+        document.getElementById('minOverpaymentAmount').value = apomArr;
 
         calcObj.render();
     }
 
     window.onclick = function () {
         document.getElementById('btn').onclick = calcAllPaid;
-    }
+    }  
 }
