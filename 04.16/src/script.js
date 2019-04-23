@@ -317,3 +317,159 @@
         document.getElementById('btnRefueling').onclick = refuelingAuto;
     }
 }
+
+// Задача. Розробити гру «Вгадай число». Двоє гравців записують свої варіанти. Виграє той, у кого число ближче до загаданого комп’ютером. Підраховувати кількість перемог кожного гравця.
+{
+    // <div id="container">
+    //     First player points <input type="text" id="inp_1"> Second player points <input type="text" id="inp_2"> <br>
+    //     Variant of the next number (player 1) <input type="number" id="inp_3"> Variant of the next number (player 2) <input type="number" id="inp_4"> <br>
+    //     <button id="btn">Compare options</button> <br>
+    // </div>
+
+    class Game {
+
+        constructor() {
+            this.count_1 = 0;
+            this.count_2 = 0;
+        }
+
+        // render() {
+        //     let div = document.getElementById('container');
+
+        //     let text_1 = document.createTextNode('First player points ');
+        //     let inp_1 = document.createElement('input');
+        //     inp_1.type = 'text';
+        //     inp_1.id = 'inp_1';
+        //     inp_1.value = this.count_1;
+        //     let text_2 = document.createTextNode('Second player points ');
+        //     let inp_2 = document.createElement('input');
+        //     inp_2.type = 'text';
+        //     inp_2.id = 'inp_2';
+        //     inp_2.value = this.count_2;
+        //     let text_3 = document.createTextNode('Variant of the next number (player 1) ');
+        //     let inp_3 = document.createElement('input');
+        //     inp_3.type = 'number';
+        //     inp_3.id = 'inp_3';
+        //     let text_4 = document.createTextNode('Variant of the next number (player 2) ');
+        //     let inp_4 = document.createElement('input');
+        //     inp_4.type = 'number';
+        //     inp_4.id = 'inp_4';
+        //     let btn = document.createElement('button');
+        //     let btnName = 'Compare options';
+        //     let br1 = document.createElement('br');
+        //     let br2 = document.createElement('br');
+
+        //     div.appendChild(text_1);
+        //     div.appendChild(inp_1);
+        //     div.appendChild(text_2);
+        //     div.appendChild(inp_2);
+        //     div.appendChild(br1);
+        //     div.appendChild(text_3);
+        //     div.appendChild(inp_3);
+        //     div.appendChild(text_4);
+        //     div.appendChild(inp_4);
+        //     div.appendChild(br2);
+        //     btn.innerText = btnName;
+        //     div.appendChild(btn);
+        // }
+    }
+    
+    function compare() {
+        let game = new Game;
+        // game.render();
+
+        let count_1 = game.count_1;
+        let count_2 = game.count_2;
+        let answerPlayer1 = parseInt(document.getElementById('inp_3').value);
+        let answerPlayer2 = parseInt(document.getElementById('inp_4').value);
+        let rnd = Math.floor(Math.random() * 100 + 1);
+        
+        let compareRndWithanswerPlayer1 = Math.abs(answerPlayer1 - rnd);
+        let compareRndWithanswerPlayer2 = Math.abs(answerPlayer2 - rnd);
+        
+        if (compareRndWithanswerPlayer1 < compareRndWithanswerPlayer2) {
+            document.getElementById('inp_1').value = game.count_1 + 1;
+            count_1 = document.getElementById('inp_1').value;
+        } else {
+            document.getElementById('inp_2').value = game.count_2 + 1;
+            count_2 = document.getElementById('inp_2').value;
+        }
+        
+    }
+
+    window.onclick = function () {
+        document.getElementById('btn').onclick = compare;
+    }
+}
+
+// Задача. Розробити кредитний калькулятор як окремий клас.
+{
+    // <div id="container">
+    //     Credit summ: <input type="number" id="creditSumm"><br>
+    //     Percentage rate: <input type="number" id="percentageRate"><br>
+    //     Minimum loan period: <input type="number" id="minimumLoanPeriod"><br>
+    //     Maximum loan period: <input type="number" id="maximumLoanPeriod"><br>
+
+    //     Min monthly payment amount: <input type="number" id="minMonthlyPaymentAmount"><br>
+    //     Max monthly payment amount: <input type="number" id="maxMonthlyPaymentAmount"><br>
+    //     Minimum overpayment amount: <input type="number" id="minOverpaymentAmount"><br>
+    //     Maximum overpayment amount: <input type="number" id="maxOverpaymentAmount"><br>
+    //     <button id="btn">Calculate</button>
+    // </div>
+
+    class Calculator {
+        constructor(creditSum, percentage, minMonth, maxMonth) {
+            this.creditSum = creditSum;
+            this.percentage = percentage;
+            this.minMonth = minMonth;
+            this.maxMonth = maxMonth;
+        }
+
+        toString() {
+            return `Credit summary: ${this.creditSum}, credit percentage: ${this.percentage}, The minimum term of the loan: ${this.minMonth}, The maximum term of the loan: ${this.maxMonth}`;
+        }
+
+        amountPaidOutMonthly() {
+            let minMonthlyPayment = (this.creditSum * ((this.percentage / 100) + 1)) / this.minMonth;
+            let maxMonthlyPayment = (this.creditSum * ((this.percentage / 100) + 1)) / this.maxMonth;
+            let arr = [minMonthlyPayment, maxMonthlyPayment];
+            return arr;
+        }
+        
+        totalAmountOfOverpayment() {
+            let minAmountOfOverpayment = (this.creditSum * ((this.percentage / 100) + 1)) - this.creditSum;
+            let maxAmountOfOverpayment = (this.creditSum * ((this.percentage / 100) + 1)) - this.creditSum;
+            return [minAmountOfOverpayment, maxAmountOfOverpayment];
+        }
+
+        render() {
+            let div = document.getElementById('container');
+            let p = document.createElement('p');
+            p.innerText = toString;
+            div.appendChild(p);
+        }
+    }
+
+    let creditSum = parseFloat(document.getElementById('creditSumm').value);
+    let percentage = parseFloat(document.getElementById('percentageRate').value);
+    let minMonth = parseFloat(document.getElementById('minimumLoanPeriod').value);
+    let maxMonth = parseFloat(document.getElementById('maximumLoanPeriod').value);
+
+    let calcObj = new Calculator(creditSum, percentage, minMonth, maxMonth);
+
+    function calcAllPaid() {
+        let mpaArr = calcObj.amountPaidOutMonthly();
+        document.getElementById('minMonthlyPaymentAmount').value = mpaArr[0];
+        document.getElementById('maxMonthlyPaymentAmount').value = mpaArr[1];
+
+        let apomArr = calcObj.amountPaidOutMonthly();
+        document.getElementById('minMonthlyPaymentAmount').value = apomArr[0];
+        document.getElementById('maxMonthlyPaymentAmount').value = apomArr[1];
+
+        calcObj.render();
+    }
+
+    window.onclick = function () {
+        document.getElementById('btn').onclick = calcAllPaid;
+    }
+}
