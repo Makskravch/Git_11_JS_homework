@@ -227,7 +227,7 @@
             if (quantityFuel + this.currentNumberLiters > this.volumeTank) {
                 throw new Error('Not enough storage');
             }
-            this.currentNumberLiters += quantityFuel;
+            return this.currentNumberLiters += quantityFuel;
         }
 
         getNumberPassengers() {
@@ -249,6 +249,8 @@
         }
     }
 
+    let auto;
+
     function createAuto() {
         let inputArr = document.querySelectorAll('input');
         let brand;
@@ -265,16 +267,15 @@
             numberPassengers = +inputArr[4].value;
         }
 
-        var auto = new Auto(brand, volumeTank, currentNumberLiters, numberSeats, numberPassengers);
+        auto = new Auto(brand, volumeTank, currentNumberLiters, numberSeats, numberPassengers);
 
         render(auto);
         createNewFields();
     }
 
-    function refuelingAuto(auto) {          // Does not work!!!
+    function refuelingAuto(auto) {
         let volume = parseInt(document.getElementById('newInp').value);
-        // auto.refueling(volume);
-        // render(auto);
+        document.getElementById('volume').value = auto.refueling(volume);
     }
 
     function render(auto) {
@@ -311,10 +312,9 @@
         div.appendChild(disembarkationPassengers);
     }
 
-
-    window.onclick = function () {
+    window.onload = function () {
         document.getElementById('addAuto').onclick = createAuto;
-        document.getElementById('btnRefueling').onclick = refuelingAuto;
+        document.getElementById('btnRefueling').onclick = () => refuelingAuto(auto);
     }
 }
 
@@ -397,7 +397,7 @@
         
     }
 
-    window.onclick = function () {
+    window.onload = function () {
         document.getElementById('btn').onclick = compare;
     }
 }
@@ -467,7 +467,7 @@
         calcObj.render();
     }
 
-    window.onclick = function () {
+    window.onload = function () {
         document.getElementById('btn').onclick = calcAllPaid;
     }  
 }

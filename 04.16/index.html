@@ -10,11 +10,11 @@
 </head>
 
 <body>
-    <input type="text" placeholder="Enter car brand"><br>
-    <input type="number" placeholder="Enter tank volume"><br>
-    <input type="number" placeholder="Enter current number of liters"><br>
-    <input type="number" placeholder="Enter the number of places"><br>
-    <input type="number" placeholder="Enter the number of passengers"><br>
+    <input id="brand" type="text" placeholder="Enter car brand"><br>
+    <input id="volume" type="number" placeholder="Enter tank volume"><br>
+    <input id="currentLiters" type="number" placeholder="Enter current number of liters"><br>
+    <input id="passengersPlace" type="number" placeholder="Enter the number of places"><br>
+    <input id="currentPassengers" type="number" placeholder="Enter the number of passengers"><br>
     <input id="addAuto" type="button" value="Add auto">
 
     <div id="container"></div>
@@ -38,7 +38,7 @@
                 if (quantityFuel + this.currentNumberLiters > this.volumeTank) {
                     throw new Error('Not enough storage');
                 }
-                this.currentNumberLiters += quantityFuel;
+                return this.currentNumberLiters += quantityFuel;
             }
 
             getNumberPassengers() {
@@ -60,6 +60,8 @@
             }
         }
 
+        let auto;
+
         function createAuto() {
             let inputArr = document.querySelectorAll('input');
             let brand;
@@ -76,16 +78,15 @@
                 numberPassengers = +inputArr[4].value;
             }
 
-            var auto = new Auto(brand, volumeTank, currentNumberLiters, numberSeats, numberPassengers);
+            auto = new Auto(brand, volumeTank, currentNumberLiters, numberSeats, numberPassengers);
 
             render(auto);
             createNewFields();
         }
 
-        function refuelingAuto(auto) {          // Does not work!!!
+        function refuelingAuto(auto) {
             let volume = parseInt(document.getElementById('newInp').value);
-            // auto.refueling(volume);
-            // render(auto);
+            document.getElementById('volume').value = auto.refueling(volume);
         }
 
         function render(auto) {
@@ -122,10 +123,9 @@
             div.appendChild(disembarkationPassengers);
         }
 
-
-        window.onclick = function () {
+        window.onload = function () {
             document.getElementById('addAuto').onclick = createAuto;
-            document.getElementById('btnRefueling').onclick = refuelingAuto;
+            document.getElementById('btnRefueling').onclick = () => refuelingAuto(auto);
         }
     </script>
 </body>
