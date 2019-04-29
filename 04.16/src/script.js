@@ -247,6 +247,10 @@
             }
             this.numberPassengers -= passengers;
         }
+
+        render() {
+
+        }
     }
 
     let auto;
@@ -286,7 +290,7 @@
         div.appendChild(p);
     }
 
-    function createNewFields() {
+    function createNewFields() {  // це має бути метод render
         let div = document.getElementById('container');
 
         let input = document.createElement('input');
@@ -314,7 +318,8 @@
 
     window.onload = function () {
         document.getElementById('addAuto').onclick = createAuto;
-        document.getElementById('btnRefueling').onclick = () => refuelingAuto(auto);
+        // document.getElementById('btnRefueling').onclick = refuelingAuto.bind(null,auto);
+        document.getElementById('btnRefueling').onclick = function () {refuelingAuto(auto)} //() => refuelingAuto(auto);
     }
 }
 

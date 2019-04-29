@@ -58,30 +58,48 @@
                 }
                 this.numberPassengers -= passengers;
             }
+
+            render() {
+                let div = document.getElementById('container');
+
+                let input = document.createElement('input');
+                input.id = 'newInp';
+                input.type = 'number';
+                let btnRefueling = document.createElement('button');
+                btnRefueling.id = 'btnRefueling';
+                btnRefueling.innerText = 'Refueling';
+                let getNumberPassengers = document.createElement('button');
+                getNumberPassengers.id = 'getNumberPassengers';
+                getNumberPassengers.innerText = 'Get passengers';
+                let addPassengers = document.createElement('button');
+                addPassengers.id = 'addPassengers';
+                addPassengers.innerText = 'Get passengers';
+                let disembarkationPassengers = document.createElement('button');
+                disembarkationPassengers.id = 'disembarkationPassengers';
+                disembarkationPassengers.innerText = 'Get passengers';
+
+                div.appendChild(input);
+                div.appendChild(btnRefueling);
+                div.appendChild(getNumberPassengers);
+                div.appendChild(addPassengers);
+                div.appendChild(disembarkationPassengers);
+            }
         }
 
         let auto;
 
         function createAuto() {
             let inputArr = document.querySelectorAll('input');
-            let brand;
-            let volumeTank;
-            let currentNumberLiters;
-            let numberSeats;
-            let numberPassengers;
-
-            for (let i = 0; i < inputArr.length; i++) {
-                brand = inputArr[0].value;
-                volumeTank = +inputArr[1].value;
-                currentNumberLiters = +inputArr[2].value;
-                numberSeats = +inputArr[3].value;
-                numberPassengers = +inputArr[4].value;
-            }
+            let brand = inputArr[0].value;
+            let volumeTank = +inputArr[1].value;
+            let currentNumberLiters = +inputArr[2].value;
+            let numberSeats = +inputArr[3].value;
+            let numberPassengers = +inputArr[4].value;
 
             auto = new Auto(brand, volumeTank, currentNumberLiters, numberSeats, numberPassengers);
 
-            render(auto);
-            createNewFields();
+            viewObj(auto);
+            auto.render();
         }
 
         function refuelingAuto(auto) {
@@ -89,7 +107,7 @@
             document.getElementById('volume').value = auto.refueling(volume);
         }
 
-        function render(auto) {
+        function viewObj(auto) {
             let div = document.getElementById('container');
             let p = document.createElement('p');
             p.id = 'p';
@@ -97,35 +115,35 @@
             div.appendChild(p);
         }
 
-        function createNewFields() {
-            let div = document.getElementById('container');
+        // function createNewFields() {
+        //     let div = document.getElementById('container');
 
-            let input = document.createElement('input');
-            input.id = 'newInp';
-            input.type = 'number';
-            let btnRefueling = document.createElement('button');
-            btnRefueling.id = 'btnRefueling';
-            btnRefueling.innerText = 'Refueling';
-            let getNumberPassengers = document.createElement('button');
-            getNumberPassengers.id = 'getNumberPassengers';
-            getNumberPassengers.innerText = 'Get passengers';
-            let addPassengers = document.createElement('button');
-            addPassengers.id = 'addPassengers';
-            addPassengers.innerText = 'Get passengers';
-            let disembarkationPassengers = document.createElement('button');
-            disembarkationPassengers.id = 'disembarkationPassengers';
-            disembarkationPassengers.innerText = 'Get passengers';
+        //     let input = document.createElement('input');
+        //     input.id = 'newInp';
+        //     input.type = 'number';
+        //     let btnRefueling = document.createElement('button');
+        //     btnRefueling.id = 'btnRefueling';
+        //     btnRefueling.innerText = 'Refueling';
+        //     let getNumberPassengers = document.createElement('button');
+        //     getNumberPassengers.id = 'getNumberPassengers';
+        //     getNumberPassengers.innerText = 'Get passengers';
+        //     let addPassengers = document.createElement('button');
+        //     addPassengers.id = 'addPassengers';
+        //     addPassengers.innerText = 'Get passengers';
+        //     let disembarkationPassengers = document.createElement('button');
+        //     disembarkationPassengers.id = 'disembarkationPassengers';
+        //     disembarkationPassengers.innerText = 'Get passengers';
 
-            div.appendChild(input);
-            div.appendChild(btnRefueling);
-            div.appendChild(getNumberPassengers);
-            div.appendChild(addPassengers);
-            div.appendChild(disembarkationPassengers);
-        }
+        //     div.appendChild(input);
+        //     div.appendChild(btnRefueling);
+        //     div.appendChild(getNumberPassengers);
+        //     div.appendChild(addPassengers);
+        //     div.appendChild(disembarkationPassengers);
+        // }
 
         window.onload = function () {
             document.getElementById('addAuto').onclick = createAuto;
-            document.getElementById('btnRefueling').onclick = () => refuelingAuto(auto);
+            document.getElementById('btnRefueling').onclick = refuelingAuto.bind(null,auto);
         }
     </script>
 </body>
