@@ -310,3 +310,285 @@
         atm.toString()
     }
 }
+
+// Приклад 4. Розробити клас «ХрестикиНулики»
+{
+    // <div id="container"></div>
+
+    class XrestikiNoliki {
+        constructor(player1 = 'Player 1', player2 = 'Player 2') {
+            this.player1 = player1
+            this.player2 = player2
+            this.currentPlayer = Math.floor(Math.random() * 2)
+        }
+
+        changePlayer() {
+            this.currentPlayer = (this.currentPlayer + 1) % 2
+            switch (this.currentPlayer) {
+                case 0:
+                    this.btn1.style.backgroundColor = 'green'
+                    this.btn2.style.backgroundColor = ''
+                    break;
+                case 1:
+                    this.btn2.style.backgroundColor = 'green'
+                    this.btn1.style.backgroundColor = ''
+                    break;
+            }
+        }
+
+        onClick(e) {
+            let field = e.target    //Адреса поля на яке ми натиснули
+            field.innerText = (this.currentPlayer == 0) ? 'X' : 'O'
+            this.changePlayer()
+        }
+
+        render(containerId) {
+            let container = document.getElementById(containerId)
+
+            this.btn1 = document.createElement('button')
+            this.btn1.innerText = this.player1
+            container.appendChild(this.btn1)
+
+            this.btn2 = document.createElement('button')
+            this.btn2.innerText = this.player2
+            container.appendChild(this.btn2)
+
+            this.changePlayer()
+
+            let table = document.createElement('table')
+            table.style.borderSpacing = '0'
+            for (let i = 0; i < 3; i++) {
+                let tr = document.createElement('tr')
+                table.appendChild(tr)
+                for (let j = 0; j < 3; j++) {
+                    let td = document.createElement('td')
+                    td.style.width = '40px'
+                    td.style.height = '40px'
+                    td.style.border = '1px solid black'
+                    td.style.lineHeight = '40px'
+                    td.style.textAlign = 'center'
+                    td.style.fontSize = '40px'
+                    td.onclick = this.onClick.bind(this)
+                    tr.appendChild(td)
+                }
+            }
+
+            container.appendChild(table)
+        }
+    }
+
+    window.onload = function () {
+        let game = new XrestikiNoliki()
+        game.render('container')
+    }
+}
+
+// Сапер 1D
+{
+    // <div id="container"></div>
+    // <input type="button" value="Start" onclick="startGame()">
+
+    class Saper1D {
+        constructor(cellCount = 10, mineCount = 4) {
+            if (cellCount <= 0) {
+                throw new Error('Get more cellCount.')
+            }
+            if (mineCount <= 0) {
+                throw new Error('Get more mineCount.')
+            }
+            if (mineCount > cellCount) {
+                throw new Error('mineCount > cellCount')
+            }
+            this.cellCount = cellCount
+            this.mineCount = mineCount
+        }
+
+        getMinePosition() {
+            let positions = []
+            for (let i = 0; i < this.mineCount; i++) {
+                let randNum = Math.floor(Math.random() * this.cellCount)
+                if (positions.includes(randNum)) {
+                    i--
+                    continue
+                }
+                positions.push(randNum)
+            }
+            return positions
+        }
+
+        cellClick() {
+            let td = this
+            if (td.getAttribute('isMine') == '1') {
+                td.style.background = 'red'
+            } else {
+                td.style.background = 'green'
+                //Рух вліво
+                let siblin = td.previousElementSibling;
+                while (siblin) {
+                    if (siblin.getAttribute("isMine") == "0") {
+                        siblin.style.background = "green";
+                        siblin = siblin.previousElementSibling;
+                    }
+                    else
+                        break;
+                }
+                //Рух вправо
+                siblin = td.nextElementSibling;
+                while (siblin) {
+                    if (siblin.getAttribute("isMine") == "0") {
+                        siblin.style.background = "green";
+                        siblin = siblin.nextElementSibling;
+                    }
+                    else
+                        break;
+                }
+
+            }
+        }
+
+        render(containreId) {
+            let minePosition = this.getMinePosition()
+            let table = document.createElement('table')
+            table.border = '1px solid black'
+
+            let tr = document.createElement('tr')
+
+            for (let i = 0; i < this.cellCount; i++) {
+                let td = document.createElement('td')
+                td.innerText = '*'
+                td.setAttribute('isMine', (minePosition.includes(i)) ? '1' : '0')
+                td.onclick = this.cellClick
+                tr.appendChild(td)
+            }
+
+            table.appendChild(tr)
+            document.getElementById(containreId).appendChild(table)
+        }
+    }
+
+    function startGame() {
+        let saper = new Saper1D()
+        saper.render('container')
+    }
+}
+
+// Приклад 2. Розробити клас «Сапер 2D»
+{
+    // <div id="container"></div>
+    // <input type="button" value="Start" onclick="startGame()"></input>
+
+    class Saper2D {
+        constructor(rowCount = 3, colCount = 5, mineCount = 10) {
+            // if (cellCount <= 0) {
+            //     throw new Error('Get more cellCount.')
+            // }
+            if (mineCount <= 0) {
+                throw new Error('Get more mineCount.')
+            }
+            if (mineCount > rowCount * colCount) {
+                throw new Error('mineCount > cellCount')
+            }
+            this.rowCount = rowCount
+            this.colCount = colCount
+            this.mineCount = mineCount
+        }
+
+        getMinePosition() {
+            let positions = []
+            let randNum
+            this.rowMinePosition = []
+            this.colMinePosition = []
+
+            for (let i = 0; i < this.mineCount; i++) {
+                randNum = Math.floor(Math.random() * this.rowCount)
+                this.rowMinePosition.push(randNum)
+            }
+            positions.push(this.rowMinePosition)
+
+            for (let i = 0; i < this.mineCount; i++) {
+                randNum = Math.floor(Math.random() * this.colCount)
+                if (this.colMinePosition.includes(randNum) && this.rowMinePosition.includes(randNum)) {
+                    i--
+                    continue
+                }
+                this.colMinePosition.push(randNum)
+            }
+            positions.push(this.colMinePosition)
+
+            return positions
+        }
+
+        cellClick() {
+            let td = this
+            if (td.getAttribute('isMine') == '1') {
+                td.style.background = 'red'
+            } else {
+                td.style.background = 'green'
+                // //Рух вліво
+                // let siblin = td.previousElementSibling;
+                // while (siblin) {
+                //     if (siblin.getAttribute("isMine") == "0") {
+                //         siblin.style.background = "green";
+                //         siblin = siblin.previousElementSibling;
+                //     }
+                //     else
+                //         break;
+                // }
+                // //Рух вправо
+                // siblin = td.nextElementSibling;
+                // while (siblin) {
+                //     if (siblin.getAttribute("isMine") == "0") {
+                //         siblin.style.background = "green";
+                //         siblin = siblin.nextElementSibling;
+                //     }
+                //     else
+                //         break;
+                // }
+
+            }
+        }
+
+        render(containreId) {
+            let minePosition = this.getMinePosition()
+            let table = document.createElement('table')
+            table.border = '1px solid black'
+            table.style.borderSpacing = '0'
+
+            for (let j = 0; j < this.rowCount; j++) {
+                let tr = document.createElement('tr')
+                table.appendChild(tr)
+                for (let k = 0; k < this.colCount; k++) {
+                    let td = document.createElement('td')
+                    td.innerText = '*'
+                    td.setAttribute('isMine', '0')
+                    // for (let i = 0; i < this.mineCount; i++) {
+                    //     if (minePosition[0][i] == j) {
+                    //         if (minePosition[1][i] == k) {
+                    //             td.setAttribute('isMine', '1')
+                    //         } else {
+                    //             td.setAttribute('isMine', '0')
+                    //         }
+                    //     }
+                    // }
+
+                    td.onclick = this.cellClick
+                    tr.appendChild(td)
+                }
+            }
+            document.getElementById(containreId).appendChild(table)
+
+            for (let i = 0; i < this.mineCount; i++) {
+                let trArr = document.getElementsByTagName('tr')
+                let oneTr = trArr[minePosition[0][i]]
+                let tdArr = oneTr.getElementsByTagName('td')
+                let oneTd = tdArr[minePosition[1][i]]
+                oneTd.setAttribute('isMine', '1')
+            }
+        }
+    }
+
+    function startGame() {
+        let saper = new Saper2D()
+        saper.render('container')
+    }
+}
