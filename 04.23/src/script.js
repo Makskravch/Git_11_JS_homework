@@ -18,7 +18,7 @@
             if (scale <= 0) {
                 throw new Error('Wrong value of scale.');
             }
-            this.scale = scale;
+            this.scale = scale;    Навіщо зберігати це значення? Достатньо було просто помножити поля
             this.a *= this.scale;
             this.b *= this.scale;
         }
@@ -117,7 +117,7 @@
         }
 
         decreaseProducts(decreaseCount) {
-            if (decreaseCount < this.count) {
+            if (decreaseCount < this.count) {   Тут навірно протилежна умова повинна була бути
                 throw new Error('Insufficient goods in stock.')
             }
             this.count -= decreaseCount;
@@ -127,7 +127,7 @@
             this.count += increaseCount
         }
 
-        costOfWholeProducts(countProducts) {
+        costOfWholeProducts(countProducts) {   
             return this.cost * countProducts
         }
 
@@ -141,7 +141,7 @@
     }
 
 
-    let productArr = []
+    let productArr = []   Цей масив і подальші функції можна було включити у новий клас Store, який би маніпулював продуктами
 
     function addProduct() {
         let productName = document.getElementById('productName').value
@@ -237,12 +237,12 @@
             }
         }
 
-        getMoney(sum) {
+        getMoney(sum) {    Спростіть цю функцію
             if (sum > this.getMaxSum()) {
                 throw new Error('Not enough money in the ATM.')
             }
             let nominalCount200 = Math.floor(sum / 200)
-            let nominalCount100 = Math.floor((sum % 200) * 200 / 100)
+            let nominalCount100 = Math.floor((sum % 200) * 200 / 100)  Кожного разу після видачі певної суми віднімайте видану суму
             let nominalCount50 = Math.floor(((sum % 200) * 200 % 100 * 100) / 50)
             let nominalCount20 = Math.floor(((sum % 200) * 200 % 100 * 100) % 50 * 50 / 20)
             let nominalCount10 = Math.floor(((sum % 200) * 200 % 100 * 100) % 50 * 50 % 20 * 20 / 10)
@@ -297,7 +297,7 @@
     }
 
     window.onload = function () {
-        let atm = new TBankomat()
+        let atm = new TBankomat() Думаю, Ви розумієте, що даний об"єкт існуватиме тільки у даному методі
 
         function someFunc() {
             let sum = parseInt(document.getElementById('input').value)
@@ -493,7 +493,7 @@
             this.mineCount = mineCount
         }
 
-        getMinePosition() {
+        getMinePosition() {   Було би простіше реалізувати з використанням двовимірного масиву
             let positions = []
             let randNum
             this.rowMinePosition = []
