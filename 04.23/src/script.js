@@ -18,9 +18,8 @@
             if (scale <= 0) {
                 throw new Error('Wrong value of scale.');
             }
-            this.scale = scale;
-            this.a *= this.scale;
-            this.b *= this.scale;
+            this.a *= scale;
+            this.b *= scale;
         }
 
         toString() {
@@ -117,7 +116,7 @@
         }
 
         decreaseProducts(decreaseCount) {
-            if (decreaseCount < this.count) {
+            if (decreaseCount > this.count) {
                 throw new Error('Insufficient goods in stock.')
             }
             this.count -= decreaseCount;
@@ -621,15 +620,15 @@
             link.appendChild(img)
             div.appendChild(link)
         }
-        
+
         updateBanner(containerId) {
             setInterval(this.render.bind(this, containerId), this.updateTime);
         }
     }
 
     window.onload = function () {
-        let imgPathArr = ['https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg', 
-            'https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80', 
+        let imgPathArr = ['https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg',
+            'https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80',
             'https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500']
         let banner = new Banner(imgPathArr)
         banner.updateBanner('container')
@@ -641,7 +640,7 @@
     // <div id="container"></div>
 
     class NewsList {
-        constructor(titleCategory, newsList, newsLink,  updateTime = 2000) {
+        constructor(titleCategory, newsList, newsLink, updateTime = 2000) {
             this.titleCategory = titleCategory
             this.newsList = newsList
             this.newsLink = newsLink
@@ -680,28 +679,28 @@
         }
     }
 
-    let newsList = ['20:00 У Зеленського представили програму та перші кроки новообраного президента (Today.ua)', 
-        '19:49 Окупанти заявили про затримання українця в Криму: перші подробиці (Народна Правда)', 
-        '19:49 Сенатор США о разговоре с Зеленским: "Есть общее видение мирной, процветающей Украины" (ОСТРОВ)', 
-        '19:46 США поки що не мають позиції з приводу розширення «нормандського формату» – Держдепартамент (Радіо Свобода)', 
-        '19:44 Рада примет постановление о точной дате инаугурации новоизбранного президента, - Ирина Геращенко (Цензор.Нет)', 
-        '19:38 Глава КСУ поплатился за отмену ответственности за незаконное обогащение (lenta.ua)', 
-        '19:37 Группа депутатов Молдовы требуют разъяснений относительно "санкционного" письма к Порошенко (ОСТРОВ) + 2 схожi', 
-        '19:30 Гавриш считает, что Зеленский планирует создать новую систему правления в Украине (NEWSONE)', 
-        '19:20 Василь Гацько пояснив, чому Зеленський – не нове обличчя в українській політиці (Zik)', 
+    let newsList = ['20:00 У Зеленського представили програму та перші кроки новообраного президента (Today.ua)',
+        '19:49 Окупанти заявили про затримання українця в Криму: перші подробиці (Народна Правда)',
+        '19:49 Сенатор США о разговоре с Зеленским: "Есть общее видение мирной, процветающей Украины" (ОСТРОВ)',
+        '19:46 США поки що не мають позиції з приводу розширення «нормандського формату» – Держдепартамент (Радіо Свобода)',
+        '19:44 Рада примет постановление о точной дате инаугурации новоизбранного президента, - Ирина Геращенко (Цензор.Нет)',
+        '19:38 Глава КСУ поплатился за отмену ответственности за незаконное обогащение (lenta.ua)',
+        '19:37 Группа депутатов Молдовы требуют разъяснений относительно "санкционного" письма к Порошенко (ОСТРОВ) + 2 схожi',
+        '19:30 Гавриш считает, что Зеленский планирует создать новую систему правления в Украине (NEWSONE)',
+        '19:20 Василь Гацько пояснив, чому Зеленський – не нове обличчя в українській політиці (Zik)',
         '19:19 Паспортизація ОРДЛО загрожує Україні російською агресією на підконтрольних територіях - Єднак (Прямий)']
-    
-    let newsLink = ['https://today.ua/u-zelenskogo-predstavili-programu-ta-pershi-kroki-novoobranogo-prezidenta/', 
-        'https://narodna-pravda.ua/2019/05/03/okupanti-zayavili-pro-zatrimannya-ukrayintsya-v-krimu-pershi-podrobitsi/', 
-        'http://www.ostro.org/general/politics/news/568047/', 
-        'https://www.radiosvoboda.org/a/news-normandskyi-format-derzhdepartament/29919709.html', 
-        'https://censor.net.ua/news/3125347/rada_primet_postanovlenie_o_tochnoyi_date_inauguratsii_novoizbrannogo_prezidenta_irina_geraschenko', 
-        'https://lenta.ua/glava-ksu-poplatilsya-za-otmenu-otvetstvennosti-za-nezakonnoe-obogashchenie-12113/', 
-        'http://www.ostro.org/general/politics/news/568046/', 
-        'https://newsone.ua/news/politics/havrish-schitaet-chto-zelenskij-planiruet-sozdat-novuju-sistemu-pravlenija-v-ukraine.html', 
-        'https://zik.ua/news/2019/05/03/vasyl_gatsko_poyasnyv_chomu_zelenskyy__ne_nove_oblychchya_v_ukrainskiy_1564795', 
+
+    let newsLink = ['https://today.ua/u-zelenskogo-predstavili-programu-ta-pershi-kroki-novoobranogo-prezidenta/',
+        'https://narodna-pravda.ua/2019/05/03/okupanti-zayavili-pro-zatrimannya-ukrayintsya-v-krimu-pershi-podrobitsi/',
+        'http://www.ostro.org/general/politics/news/568047/',
+        'https://www.radiosvoboda.org/a/news-normandskyi-format-derzhdepartament/29919709.html',
+        'https://censor.net.ua/news/3125347/rada_primet_postanovlenie_o_tochnoyi_date_inauguratsii_novoizbrannogo_prezidenta_irina_geraschenko',
+        'https://lenta.ua/glava-ksu-poplatilsya-za-otmenu-otvetstvennosti-za-nezakonnoe-obogashchenie-12113/',
+        'http://www.ostro.org/general/politics/news/568046/',
+        'https://newsone.ua/news/politics/havrish-schitaet-chto-zelenskij-planiruet-sozdat-novuju-sistemu-pravlenija-v-ukraine.html',
+        'https://zik.ua/news/2019/05/03/vasyl_gatsko_poyasnyv_chomu_zelenskyy__ne_nove_oblychchya_v_ukrainskiy_1564795',
         'https://prm.ua/pasportizatsiya-ordlo-zagrozhuye-ukrayini-rosiyskoyu-agresiyeyu-na-pidkontrolnih-teritoriyah-yednak/']
-    
+
     let newsBlock = new NewsList('Політичні новини', newsList, newsLink)
     newsBlock.updateFiveCurrentNews('container')
 }
