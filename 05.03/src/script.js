@@ -6,10 +6,21 @@
 // -	Знати сумарну кількість грошей на рахунку;
 {
     class Client {
-        constructor(id = '-', pib = 'unknown', moneyCount = 0) {
+        constructor(id = '-', pib = 'unknown') {
             Object.defineProperty(this, 'id', { value: id })
             this.pib = pib
-            this.moneyCount = moneyCount
+            let moneyCount
+            Object.defineProperty(this, 'moneyCount', {
+                get: function () {
+                    return moneyCount
+                },
+                set: function (value) {
+                    if (value < 0) {
+                        throw new Error('Wrong value!')
+                    }
+                    moneyCount = value
+                }
+            })
         }
 
         addMoney(value) {
@@ -32,8 +43,8 @@
     }
 
     class GoldenClient extends Client {
-        constructor(id = '-', pib = 'unknown', moneyCount = 0, creditLimit = 100000, creditPercent = 0.01) {
-            super(id, pib, moneyCount)
+        constructor(id = '-', pib = 'unknown', creditLimit = 100000, creditPercent = 0.01) {
+            super(id, pib)
             this.creditLimit = creditLimit
             this.creditPercent = creditPercent
         }
@@ -73,17 +84,23 @@
         }
     }
 
+    let max = new Client(123456, 'KMG')
+    max.moneyCount = 3200
+    let serg = new Client(321321, 'VSA')
+    serg.moneyCount = 3200
+    let pavlo = new Client(221213, 'IPM')
+    pavlo.moneyCount = 3200
+    let roma = new GoldenClient(789544, 'PRV', 250000, 120000)
+    roma.moneyCount = 5000
+    let sveta = new GoldenClient(687532, 'ISM', 550000, 150000)
+    sveta.moneyCount = 5000
+    let ira = new GoldenClient(985632, 'PID', 150000)
+    ira.moneyCount = 5000
+
+    let bank = new Bank()
+    bank.clinetArray = [max, serg, pavlo, roma, sveta, ira]
+
     window.onload = function () {
-        let max = new Client(123456, 'KMG', 15000)
-        let serg = new Client(321321, 'VSA', 5500)
-        let pavlo = new Client(221213, 'IPM', 19000)
-        let roma = new GoldenClient(789544, 'PRV', 250000, 120000)
-        let sveta = new GoldenClient(687532, 'ISM', 550000, 150000)
-        let ira = new GoldenClient(985632, 'PID', 150000)
-
-        let bank = new Bank()
-        bank.clinetArray = [max, serg, pavlo, roma, sveta, ira]
-
         bank.clinetArray.filter(element => {
             if (!element.creditLimit) {
                 return console.log(element);
@@ -105,7 +122,7 @@
 {
     class Dice {
         constructor(faceCount = 6) {
-            this.faceCount =faceCount
+            this.faceCount = faceCount
         }
 
         getScore() {
@@ -116,7 +133,7 @@
     class DicePro extends Dice {
         constructor(faceCount = 6, attemptCount = 2) {
             super(faceCount)
-            this.attemptCount =attemptCount
+            this.attemptCount = attemptCount
         }
 
         getScore() {
