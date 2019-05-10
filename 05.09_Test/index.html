@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        span {
+            display: block
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            border-spacing: 0;
+        }
+    </style>
+    <!-- Задача. Створити клас «Тренажер арифметичних операцій»
+    Випадковим чином генеруємо :
+    - перше число;
+    - друге число;
+    - операцію, яку треба виконати.
+    Користувач вводить свій варіант відповіді і натискає на «Check». Після перевірки користувачу виводиться результат.
+    ---------------------------------
+    На основі цього класу створити клас «Тестер», який виконує перевірку вказаної кількості завдань (при цьому зберігає неправильні відповіді), нараховує бали у 100 бальній шкалі.
+    Після тестування вивести усі неправильні відповіді із вказування правильних -->
+    <script>
+        class SimulatorArithmeticOperations {
+            constructor() {
+                this.firstNumber = Math.floor(1 + Math.random() * 10)
+                this.secondNumber = Math.floor(1 + Math.random() * 10)
+                this.operationType = Math.floor(Math.random() * 4)
+                this.answerInput
+                this.resultSpan
+                this.result
+            }
+
+            onClick() {
+                let result
+                switch (this.operationType) {
+                    case 0:
+                        result = this.firstNumber + this.secondNumber
+                        break;
+                    case 1:
+                        result = this.firstNumber - this.secondNumber
+                        break;
+                    case 2:
+                        result = this.firstNumber * this.secondNumber
+                        break;
+                    case 3:
+                        result = this.firstNumber / this.secondNumber
+                        break;
+                }
+                if (result == this.answerInput.value) {
+                    this.result = 1
+                    this.resultSpan.innerText = 'Result: True'
+                } else {
+                    this.result = 0
+                    this.resultSpan.innerText = 'Result: False'
+                }
+            }
+
+            render(containerId) {
+                let div = document.getElementById(containerId)
+                let firstNumSpan = document.createElement('span')
+                firstNumSpan.innerText = `First number: ${this.firstNumber}`
+                div.appendChild(firstNumSpan)
+                let operationSpan = document.createElement('span')
+                switch (this.operationType) {
+                    case 0:
+                        operationSpan.innerText = `Operation: +`
+                        break;
+                    case 1:
+                        operationSpan.innerText = `Operation: -`
+                        break;
+                    case 2:
+                        operationSpan.innerText = `Operation: *`
+                        break;
+                    case 3:
+                        operationSpan.innerText = `Operation: /`
+                        break;
+                }
+                div.appendChild(operationSpan)
+                let secondNumSpan = document.createElement('span')
+                secondNumSpan.innerText = `Second number: ${this.secondNumber}`
+                div.appendChild(secondNumSpan)
+                //----------
+                let answerSpan = document.createElement('span')
+                answerSpan.innerText = 'Your answer: '
+                this.answerInput = document.createElement('input')
+                this.answerInput.type = 'number'
+                answerSpan.appendChild(this.answerInput)
+                div.appendChild(answerSpan)
+                let button = document.createElement('button')
+                button.innerText = 'Check'
+                button.onclick = this.onClick.bind(this)
+                div.appendChild(button)
+                this.resultSpan = document.createElement('span')
+                this.resultSpan.innerText = 'Result:'
+                div.appendChild(this.resultSpan)
+            }
+        }
+
+        class Tester {
+            constructor(countTasks) {
+                this.taskArr = []
+                for (let i = 0; i < countTasks; i++) {
+                    let task = new SimulatorArithmeticOperations()
+                    this.taskArr.push(task)
+                }
+                this.falseAnswerCount
+                this.trueAnswerCount
+                this.totalAnswerCount
+            }
+
+            onClick(innerContainerId) {
+                let innerDiv = document.getElementById(innerContainerId)
+                innerDiv.innerText = ''
+                this.falseAnswerCount = 0
+                this.trueAnswerCount = 0
+                this.totalAnswerCount = 0
+                for (let i = 0; i < this.taskArr.length; i++) {
+                    if (this.taskArr[i].result == 0) {
+                        this.falseAnswerCount++
+                    }
+                    if (this.taskArr[i].result == 1) {
+                        this.trueAnswerCount++
+                    }
+                    if (this.taskArr[i].result !== undefined) {
+                        this.totalAnswerCount++
+                    }
+                }
+                let totalQuestionSpan = document.createElement('span')
+                totalQuestionSpan.innerText = `Total question count: `
+                let totalQuestionInput = document.createElement('input')
+                totalQuestionInput.value = this.taskArr.length
+                totalQuestionInput.disabled = 'disabled'
+                totalQuestionSpan.appendChild(totalQuestionInput)
+                innerDiv.appendChild(totalQuestionSpan)
+                let currentQuestionSpan = document.createElement('span')
+                currentQuestionSpan.innerText = `Current question: `
+                let currentQuestionInput = document.createElement('input')
+                currentQuestionInput.value = this.totalAnswerCount
+                currentQuestionInput.disabled = 'disabled'
+                currentQuestionSpan.appendChild(currentQuestionInput)
+                innerDiv.appendChild(currentQuestionSpan)
+                let scoreSpan = document.createElement('span')
+                scoreSpan.innerText = 'Score: '
+                let scoreInput = document.createElement('input')
+                scoreInput.value = this.trueAnswerCount * 100 / this.taskArr.length + '%'
+                scoreInput.disabled = 'disabled'
+                scoreSpan.appendChild(scoreInput)
+                innerDiv.appendChild(scoreSpan)
+                //----------- Створюємо таблицю з неправильними відповідями
+                let table = document.createElement('table')
+                let row = document.createElement('tr')
+                let th = document.createElement('th')
+                // Перший рядок це заголовок
+                th.innerText = 'Incorrect answers'
+                row.appendChild(th)
+                th = document.createElement('th')
+                th.innerText = 'Correct answers'
+                row.appendChild(th)
+                table.appendChild(row)
+                // Наповнюємо таблицю неправильними відповідями
+                let td
+                for (let i = 0; i < this.taskArr.length; i++) {
+                    let correctAnswer
+                    if (this.taskArr[i].result == 0) {
+                        switch (this.taskArr[i].operationType) {
+                            case 0:
+                                row = document.createElement('tr')
+                                td = document.createElement('td')
+                                td.innerText = `${this.taskArr[i].firstNumber} + ${this.taskArr[i].secondNumber} = ${this.taskArr[i].answerInput.value}`
+                                row.appendChild(td)
+                                correctAnswer = this.taskArr[i].firstNumber + this.taskArr[i].secondNumber
+                                td = document.createElement('td')
+                                td.innerText = `${this.taskArr[i].firstNumber} + ${this.taskArr[i].secondNumber} = ${correctAnswer}`
+                                row.appendChild(td)
+                                table.appendChild(row)
+                                break;
+                            case 1:
+                                row = document.createElement('tr')
+                                td = document.createElement('td')
+                                td.innerText = `${this.taskArr[i].firstNumber} - ${this.taskArr[i].secondNumber} = ${this.taskArr[i].answerInput.value}`
+                                row.appendChild(td)
+                                correctAnswer = this.taskArr[i].firstNumber - this.taskArr[i].secondNumber
+                                td = document.createElement('td')
+                                td.innerText = `${this.taskArr[i].firstNumber} - ${this.taskArr[i].secondNumber} = ${correctAnswer}`
+                                row.appendChild(td)
+                                table.appendChild(row)
+                                break;
+                            case 2:
+                                row = document.createElement('tr')
+                                td = document.createElement('td')
+                                td.innerText = `${this.taskArr[i].firstNumber} * ${this.taskArr[i].secondNumber} = ${this.taskArr[i].answerInput.value}`
+                                row.appendChild(td)
+                                correctAnswer = this.taskArr[i].firstNumber * this.taskArr[i].secondNumber
+                                td = document.createElement('td')
+                                td.innerText = `${this.taskArr[i].firstNumber} * ${this.taskArr[i].secondNumber} = ${correctAnswer}`
+                                row.appendChild(td)
+                                table.appendChild(row)
+                                break;
+                            case 3:
+                                row = document.createElement('tr')
+                                td = document.createElement('td')
+                                td.innerText = `${this.taskArr[i].firstNumber} / ${this.taskArr[i].secondNumber} = ${this.taskArr[i].answerInput.value}`
+                                row.appendChild(td)
+                                correctAnswer = this.taskArr[i].firstNumber / this.taskArr[i].secondNumber
+                                td = document.createElement('td')
+                                td.innerText = `${this.taskArr[i].firstNumber} / ${this.taskArr[i].secondNumber} = ${correctAnswer}`
+                                row.appendChild(td)
+                                table.appendChild(row)
+                                break;
+                        }
+                    }
+                }
+                innerDiv.appendChild(table)
+            }
+
+            render(containerId) {
+                let div = document.getElementById(containerId)
+                for (let i = 0; i < this.taskArr.length; i++) {
+                    this.taskArr[i].render(containerId)
+                }
+                let totalQuestionsCount = document.createElement('span')
+                totalQuestionsCount.innerText = `Total questions count: ${this.taskArr.length}`
+                let button = document.createElement('button')
+                button.innerText = 'Get results'
+                button.onclick = this.onClick.bind(this, 'innerContainer')
+                div.appendChild(totalQuestionsCount)
+                div.appendChild(button)
+                let innerDiv = document.createElement('div')
+                innerDiv.id = 'innerContainer'
+                div.appendChild(innerDiv)
+            }
+        }
+
+        window.onload = function () {
+            let button = document.querySelector('button')
+            button.onclick = startTest
+            
+            function startTest() {
+                let numberQuestions = document.querySelector('label input').value
+                let tester = new Tester(numberQuestions)
+                tester.render('container')
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <label>Enter number of questions: <input type="number"></label>
+    <button>Start test</button>
+    <div id="container"></div>
+</body>
+
+</html>
