@@ -15,7 +15,7 @@ class MovieInfo extends Component {
                 <table>
                     <tbody>
                         <tr>
-                            <td>{list[objKey[0]].time}</td>
+                            <td>{list[objKey[0]].time}</td>            Для виведення краще було використати map і також окреме кіно оформити у вигді окремих компонентів
                             <td><strong>{list[objKey[0]].name}</strong></td>
                             <td>{list[objKey[0]].cost}</td>
                         </tr>
